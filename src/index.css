@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  scroll-behavior: smooth;
+  transition: all 0.15s linear;
+}
+html {
+  font-size: 100% !important;
+}
+body {
+  position: relative;
+}
+button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+button:not(.focus):focus {
+  outline: 1px solid black !important;
+  outline-offset: 5px !important;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+/* h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 !important;
+} */
+:root {
+  --navHeight: 70px;
+  --headingFontSize: 55px;
+  --subHeadingFontSize: 45px;
+  --paraFontSize: 22.5px;
+  --containerMaxSize: 1800px;
+  --defaultPadding: 15px 27px;
+  --containerDefaultHeight: calc(100vh - var(--navHeight) - 1px);
+  --defaultBackgroundColor: rgba(255, 213, 134, 0.123);
+  --defaultButtonPadding: 10px 20px;
+}
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(172, 172, 172);
+  border-radius: 1rem;
+}
+@media only screen and (max-width: 1900px) {
+  :root {
+    --paraFontSize: 20px;
+    --headingFontSize: 50px;
+    --subHeadingFontSize: 40px;
+  }
+}
+@media only screen and (max-width: 1600px) {
+  :root {
+    --paraFontSize: 17.5px;
+    --headingFontSize: 40px;
+    --subHeadingFontSize: 30px;
+  }
+  /* [classname="lottie"] {
+    width: 300px;
+    height: 250px;
+  } */
+}
+@media only screen and (max-width: 1400px) {
+  :root {
+    --navHeight: 50px;
+    --headingFontSize: 35px;
+    --subHeadingFontSize: 25px;
+    --paraFontSize: 17.5px;
+    --defaultPadding: 10px 20px;
+  }
+  /* [classname="lottie"] {
+    width: 250px;
+    height: 200px;
+  } */
+}
+@media only screen and (max-width: 1024px) {
+  :root {
+    --navHeight: 45px;
+    --headingFontSize: 30px;
+    --subHeadingFontSize: 20px;
+    --paraFontSize: 15px;
+    --defaultButtonPadding: 7px 15px;
+    --defaultPadding: 7px 15px;
+  }
+  /* [classname="lottie"] {
+    width: 180px;
+    height: 120px;
+  } */
+}
+@media only screen and (max-width: 724px) {
+  :root {
+    --navHeight: 40px;
+    --paraFontSize: 13px;
+    --subHeadingFontSize: 20px;
+    --headingFontSize: 30px;
+    --defaultButtonPadding: 5px 10px;
+    --bs-navbar-toggler-focus-width: 0.1rem;
+    --defaultPadding: 5px 10px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  :root {
+    --navHeight: 35px;
+    --paraFontSize: 10px;
+    --subHeadingFontSize: 17px;
+    --headingFontSize: 25px;
+  }
+}
