@@ -14,19 +14,14 @@ export default function Template1({ full }) {
   }, [userDetails]);
 
   return (
-    <div
-      ref={resumeRef}
-      className="containerp h-100 bg-white"
-      style={{ overflowY: "auto" }}
-    >
-      
-      <div className="container-fluid ">
+    <div ref={resumeRef} className={"containerp h-100"}>
+      <div className="container-fluid bg-white">
         <main
           style={full ? { position: "absolute", visibility: "hidden" } : {}}
           id={full ? "contentFrom" : ""}
         >
           <style>{`.containerp  header{background: rgb(30, 32, 30);color: white;display: flex;align-items:center;}.containerp ul {margin: 0 !important; padding: 0 !important} .container-fluid{padding: 0 !important}`}</style>
-          <style>{`section{margin: 15px 10px}h1{font-size: 22px}h2{font-size: 17px}h3 {font-size: 15px}h4{font-size: 13px}.section-content{padding:0 1.25rem;font-size: 10px} .custom h1{font-size: 15px}.custom h2{font-size: 14px}.custom h3{font-size: 13px}.container-fluid{padding: 0 7px}`}</style>
+          <style>{`section{margin: 15px 10px}h1{font-size: 22px}h2{font-size: 17px}h3 {font-size: 15px}h4{font-size: 13px}.section-content{padding:0 1.25rem;font-size: 10px} .custom h1{font-size: 15px}.custom h2{font-size: 14px}.custom h3{font-size: 13px}.container-fluid{padding: 0 7px}.containerp .A4{background: white;}`}</style>
           <header>
             <div
               style={{
@@ -80,7 +75,14 @@ export default function Template1({ full }) {
                 case "Objective":
                   sectionContent =
                     sectionUser.objective != "" ? (
-                      <p>{sectionUser.objective}</p>
+                      <pre
+                        style={{
+                          whiteSpace: "pre-wrap",
+                          fontFamily: "inherit",
+                        }}
+                      >
+                        {sectionUser.objective}
+                      </pre>
                     ) : !full ? (
                       "A highly motivated and detail-oriented individual with excellent organizational skills and a strong work ethic. Experienced in customer service and communication with a proven track record of delivering results. Seeking a position in a dynamic and challenging environment where my skills can be utilized to their fullest potential."
                     ) : (

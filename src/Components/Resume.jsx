@@ -19,10 +19,22 @@ export default function Resume({ previewModalShow, setPreviewModalShow }) {
     resetForm,
     mobileView,
     currentSection,
-    setCurrentSection
+    setCurrentSection,
   } = useContext(Context);
   const [title, setTitle] = useState("Enter a title");
   const [customModalShow, setCustomModalShow] = useState(false);
+  const objective = useRef();
+  const lastSkill = useRef();
+  const lastedu = useRef();
+  const lastexp = useRef();
+
+  const setHeight = () => {
+    let textarea = objective.current;
+    if (textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+  };
 
   const Component = (k, details, i) => {
     let component;
@@ -104,18 +116,19 @@ export default function Resume({ previewModalShow, setPreviewModalShow }) {
             </div>
             <div className="row">
               <div className="col">
-                <label htmlFor="country">Country</label>
+                <label htmlFor="city">City</label>
                 <input
-                  value={details.country}
+                  value={details.city}
                   onChange={(e) =>
                     handleChange("basics", e.target.id, e.target.value, i)
                   }
                   type="text"
-                  id="country"
-                  placeholder="Enter Country"
+                  id="city"
+                  placeholder="Enter City"
                   required
                 />
               </div>
+
               <div className="col">
                 <label htmlFor="state">State</label>
                 <input
@@ -132,15 +145,15 @@ export default function Resume({ previewModalShow, setPreviewModalShow }) {
             </div>
             <div className="row">
               <div className="col">
-                <label htmlFor="city">City</label>
+                <label htmlFor="country">Country</label>
                 <input
-                  value={details.city}
+                  value={details.country}
                   onChange={(e) =>
                     handleChange("basics", e.target.id, e.target.value, i)
                   }
                   type="text"
-                  id="city"
-                  placeholder="Enter City"
+                  id="country"
+                  placeholder="Enter Country"
                   required
                 />
               </div>
@@ -166,12 +179,13 @@ export default function Resume({ previewModalShow, setPreviewModalShow }) {
           <>
             <div className="row">
               <div className="col">
-                {/* <div className="label">Objective</div> */}
                 <textarea
+                  ref={objective}
                   rows={4}
-                  onChange={(e) =>
-                    handleChange("objective", "", e.target.value, i)
-                  }
+                  onChange={(e) => {
+                    setHeight();
+                    handleChange("objective", "", e.target.value, i);
+                  }}
                   value={details.objective}
                   placeholder="Write your professional Summary"
                 />
@@ -188,6 +202,9 @@ export default function Resume({ previewModalShow, setPreviewModalShow }) {
                 <div className="row" key={si}>
                   <div className="col">
                     <input
+                      {...(si === details.skills.length - 1 && {
+                        ref: lastSkill,
+                      })}
                       list="skillDrop"
                       required
                       value={k}
@@ -216,7 +233,13 @@ export default function Resume({ previewModalShow, setPreviewModalShow }) {
             </datalist>
             {k.addmore && (
               <div className="addMore">
-                <button onClick={() => addMore("skills", i)}>
+                <button
+                  onClick={() => {
+                    addMore("skills", i);
+                    // lastSkill.current.focus();
+                    setTimeout(() => lastSkill.current.focus(), 0);
+                  }}
+                >
                   <i
                     style={{
                       marginRight: "5px",
@@ -240,8 +263,10 @@ export default function Resume({ previewModalShow, setPreviewModalShow }) {
                   <div className="row">
                     <div className="col">
                       <label htmlFor="exdesignation">Designation</label>
-
                       <input
+                        {...(si === details.experiences.length - 1 && {
+                          ref: lastexp,
+                        })}
                         list="exDesignation"
                         type="text"
                         placeholder="Designation"
@@ -364,7 +389,12 @@ export default function Resume({ previewModalShow, setPreviewModalShow }) {
             </datalist>
             {k.addmore && (
               <div className="addMore">
-                <button onClick={() => addMore("experiences", i)}>
+                <button
+                  onClick={() => {
+                    addMore("experiences", i);
+                    setTimeout(() => lastexp.current.focus(), 0);
+                  }}
+                >
                   <i
                     style={{
                       transform: "rotate(45deg)",
@@ -389,6 +419,9 @@ export default function Resume({ previewModalShow, setPreviewModalShow }) {
                     <div className="col">
                       <label htmlFor="ediname">Institute Name</label>
                       <input
+                        {...(si === details.educations.length - 1 && {
+                          ref: lastedu,
+                        })}
                         list="educationScholol"
                         type="text"
                         id="ediname"
@@ -408,13 +441,14 @@ export default function Resume({ previewModalShow, setPreviewModalShow }) {
                   </div>
                   <div className="row">
                     <div className="col">
-                      <label htmlFor="edcdate">Completion Year</label>
+                      <label htmlFor="edcname">Course Name</label>
                       <input
-                        type="month"
+                        list="edcDrop"
+                        type="text"
                         required
-                        placeholder="Completion Year"
-                        id="edcdate"
-                        value={k.edcdate}
+                        placeholder="Course Name"
+                        id="edcname"
+                        value={k.edcname}
                         onChange={(e) =>
                           handleChange(
                             "educations",
@@ -425,16 +459,15 @@ export default function Resume({ previewModalShow, setPreviewModalShow }) {
                           )
                         }
                       />
-                    </div>
+                    </div>{" "}
                     <div className="col">
-                      <label htmlFor="edcname">Course Name</label>
+                      <label htmlFor="edcdate">Completion Year</label>
                       <input
-                        list="edcDrop"
-                        type="text"
+                        type="month"
                         required
-                        placeholder="Course Name"
-                        id="edcname"
-                        value={k.edcname}
+                        placeholder="Completion Year"
+                        id="edcdate"
+                        value={k.edcdate}
                         onChange={(e) =>
                           handleChange(
                             "educations",
@@ -468,7 +501,12 @@ export default function Resume({ previewModalShow, setPreviewModalShow }) {
             </datalist>
             {k.addmore && (
               <div className="addMore">
-                <button onClick={() => addMore("educations", i)}>
+                <button
+                  onClick={() => {
+                    addMore("educations", i);
+                    setTimeout(() => lastedu.current.focus(), 0);
+                  }}
+                >
                   <i
                     style={{
                       transform: "rotate(45deg)",
@@ -559,7 +597,7 @@ export default function Resume({ previewModalShow, setPreviewModalShow }) {
         <button
           className="focus"
           onClick={() => setCurrentSection((i) => (i !== 0 ? i - 1 : i))}
-          >
+        >
           <i className="bi bi-caret-left" style={{ marginRight: "7px" }}></i>
           Previous
         </button>

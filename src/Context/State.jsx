@@ -78,11 +78,10 @@ const State = ({ children }) => {
       tempDetails.splice(id, 0, { title: title, value: "" });
       return { ...prev, details: tempDetails };
     });
-    setCurrentSection(id)
+    setCurrentSection(id);
     showAlert({
       show: true,
-      message:
-        "Addedd Section " + title,
+      message: "Addedd Section " + title,
       type: "success",
     });
   };
@@ -105,15 +104,13 @@ const State = ({ children }) => {
 
       return { ...prev, details: tempDetails };
     });
-     
-     showAlert({
-       show: true,
-       message:
-         "Deleted Section " +
-         idk.substr(0, 1).toUpperCase() +
-         idk.substr(1),
-       type: "success",
-     });
+
+    showAlert({
+      show: true,
+      message:
+        "Deleted Section " + idk.substr(0, 1).toUpperCase() + idk.substr(1),
+      type: "danger",
+    });
   };
   const resetForm = () => {
     console.log("inside reset");
@@ -315,7 +312,7 @@ const State = ({ children }) => {
             "Deleted " +
             selector.substr(0, 1).toUpperCase() +
             selector.substr(1),
-          type: "success",
+          type: "danger",
         });
         return { ...prev, details: tempArr };
       } else {
@@ -336,10 +333,10 @@ const State = ({ children }) => {
     // if (lastAlert) {
     //   clearTimeout(lastAlert);
     // }
-    setLastAlert(prev => {
-      if(prev) clearTimeout(prev);
-      return null
-    })
+    setLastAlert((prev) => {
+      if (prev) clearTimeout(prev);
+      return null;
+    });
     let temp = setTimeout(() => {
       setAlert({ show: false, message: obj.message, type: obj.type });
     }, 4000);

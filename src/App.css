@@ -383,21 +383,23 @@ main
   padding-bottom: 40px;
 }
 main
-.mainWrapper.build
-.content
-.resumeForm
-.sectionContainer
-.section
-.details div.subSection:not(:last-of-type) {
-    border-top: 1px solid #ccc;
+  .mainWrapper.build
+  .content
+  .resumeForm
+  .sectionContainer
+  .section
+  .details
+  div.subSection:not(:last-of-type) {
+  border-top: 1px solid #ccc;
 }
 main
-.mainWrapper.build
-.content
-.resumeForm
-.sectionContainer
-.section
-.details div.subSection:first-of-type {
+  .mainWrapper.build
+  .content
+  .resumeForm
+  .sectionContainer
+  .section
+  .details
+  div.subSection:first-of-type {
   border: none;
 }
 main
@@ -886,14 +888,14 @@ main .mainWrapper.build .content .previewContainer .actionBtns > button i {
   position: relative;
   height: 100%;
   width: 100%;
-}.previewModalContainer .card .card-body .preview .loadingPreview{
+}
+.previewModalContainer .card .card-body .preview .loadingPreview {
   height: 100%;
   width: 100%;
   background-image: url(/previewLoading.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-
 }
 .previewModalContainer .card .card-body .preview .loadingPreview > span {
   display: block;
@@ -905,9 +907,9 @@ main .mainWrapper.build .content .previewContainer .actionBtns > button i {
   background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 0) 0%,
-    rgba(68, 68, 68, 0.10) 30%,
-    rgba(68, 68, 68, 0.10) 50%,
-    rgba(68, 68, 68, 0.10) 70%,
+    rgba(68, 68, 68, 0.1) 30%,
+    rgba(68, 68, 68, 0.1) 50%,
+    rgba(68, 68, 68, 0.1) 70%,
     rgba(0, 0, 0, 0) 100%
   );
   background-position: 0% 50%;

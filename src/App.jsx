@@ -62,8 +62,9 @@ function App() {
   return (
     <>
       <div
-        className={"container-fluid alertContainer " + (alert.show ? "show" : "")}
-        
+        className={
+          "container-fluid alertContainer " + (alert.show ? "show" : "")
+        }
       >
         <div
           style={{
@@ -72,6 +73,12 @@ function App() {
           }}
           className={"alert alert-" + alert.type}
         >
+          {alert.type === "success" && (
+            <i className="bi bi-check-circle" style={{ marginRight: 10 }}></i>
+          )}
+          {alert.type === "danger" && (
+            <i className="bi bi-x-circle" style={{ marginRight: 10 }}></i>
+          )}
           {alert.message}
         </div>
       </div>
