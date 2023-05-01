@@ -8,7 +8,7 @@ export default function Dashboard() {
   const [uploadData, setUploadData] = useState({ label: undefined });
 
   const updateResume = (details) => {
-    resetForm();
+    resetForm(false);
     setUserDetails((prev) => {
       let td = prev.details;
       td[0].name = details.Name[0] ? details.Name[0] : "";
@@ -336,7 +336,10 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-3 mb-3 mb-lg-5" onClick={resetForm}>
+          <div
+            className="col-lg-3 mb-3 mb-lg-5"
+            onClick={() => resetForm(false)}
+          >
             <div className="card h-100" style={{ overflow: "hidden" }}>
               <div
                 onClick={() => goTo("template")}
@@ -357,7 +360,10 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-          <div className="col-lg-3 mb-3 mb-lg-5" onClick={resetForm}>
+          <div
+            className="col-lg-3 mb-3 mb-lg-5"
+            onClick={() => resetForm(false)}
+          >
             <div className="card h-100" style={{ overflow: "hidden" }}>
               <input
                 type="file"

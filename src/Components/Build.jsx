@@ -88,9 +88,10 @@ export default function Build() {
     setPages([]);
 
     setTimeout(() => {
-      idkname(contentFrom, 0, height);
-      console.log(pages);
-      for (let page of pages) {
+      let retpages = idkname(contentFrom, 0, height);
+      //  idkname(contentfoenl, o, heignt)
+
+      for (let page of retpages) {
         let div = document.createElement("div");
         div.className = "A4";
         for (let p of page) {
@@ -103,13 +104,13 @@ export default function Build() {
   };
   const idkname = (parent, current, height, ischild) => {
     let tempHeight = 0;
-    let children = parent.children;
+    let children = toArray(parent.children);
     let childLen = children.length;
     let i = 0;
 
     if (parent.scrollHeight <= height - 70) {
-      addChildToPage(current, toArray(parent.children));
-      return;
+      // addChildToPage(current, toArray(parent.children));
+      return [children];
     }
     while (childLen > 0) {
       if (tempHeight + children[i].offsetHeight <= height - 70) {
@@ -147,11 +148,65 @@ export default function Build() {
     }
   };
 
+  const getChildForOnePage1 = (child, height) => {
+    let arr = [];
+    let tempHeight = 0,
+      i = 0;
+    while (i < child.length) {
+      if (tempHeight + child[i].offsetHeight <= height - 50) {
+        arr.push(child[i]);
+        tempHeight += child[i].offsetHeight;
+        i++;
+      } else {
+        let pkkk = document.createElement("DIV");
+        pkkk.innerHTML = child[i].outerHTML;
+        pkkk.children[0].innerHTML = "";
+
+        if (child[i].children.length > 1) {
+          let idkkkk = getChildForOnePage1(
+            child[i].children,
+            height - tempHeight
+          );
+          for (let idk of idkkkk) {
+            pkkk.children[0].append(idk);
+          }
+          arr.push(pkkk.children[0]);
+        }
+        break;
+      }
+    }
+    return arr;
+  };
+  const appendChildrens = (childrens, height, contentTo) => {
+    let onePageChild = getChildForOnePage1(childrens, height);
+    let A4 = document.createElement("DIV");
+    A4.className = "A4";
+    for (let child of onePageChild) A4.append(child);
+
+    contentTo.append(A4);
+    setPreviewLoading(false);
+  };
+  const renderingPreview1 = () => {
+    let contentFrom = document.querySelector("#contentFrom");
+    let contentTo = document.querySelector("#contentTo");
+    let transfer = document.querySelector("#transfer");
+    // let childrens = toArray(contentFrom.children);
+    let height = document.getElementById("chooseContent").clientHeight;
+    contentTo.innerHTML = "";
+    transfer.innerHTML = contentFrom.innerHTML;
+
+    setTimeout(() => {
+      appendChildrens(transfer.children, height, contentTo);
+      while (transfer.children.length > 0) {
+        appendChildrens(transfer.children, height, contentTo);
+      }
+    }, 1500);
+  };
+
   useEffect(() => {
     if (previewModalShow) {
       setPreviewLoading(true);
-      renderingPreview();
-      // renderPreview();
+      renderingPreview1();
     }
   }, [previewModalShow]);
 

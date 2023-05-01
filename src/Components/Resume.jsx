@@ -480,12 +480,12 @@ export default function Resume({ previewModalShow, setPreviewModalShow }) {
                       />
                     </div>
                   </div>
-                  <span
+                  <button
                     className="delete"
                     onClick={() => deleteDetails("educations", i, si)}
                   >
                     <i className="bi bi-trash3"></i>
-                  </span>
+                  </button>
                 </div>
               );
             })}

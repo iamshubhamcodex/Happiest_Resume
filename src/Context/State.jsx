@@ -112,19 +112,19 @@ const State = ({ children }) => {
       type: "danger",
     });
   };
-  const resetForm = () => {
-    console.log("inside reset");
+  const resetForm = (condition = true) => {
     setUserDetails((prev) => {
       return { ...prev, details: userStructure.details };
     });
     setSectionDetails(sectionStructure);
     window.localStorage.removeItem("userDetails");
     window.localStorage.removeItem("sectionDetails");
-    showAlert({
-      show: true,
-      message: "Reset all Form Details",
-      type: "success",
-    });
+    if (condition)
+      showAlert({
+        show: true,
+        message: "Reset all Form Details",
+        type: "success",
+      });
   };
 
   const handleChange = (selector, id, val, i, ai) => {

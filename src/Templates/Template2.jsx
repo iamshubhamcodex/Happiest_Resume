@@ -13,7 +13,7 @@ export default function Template2({ full }) {
   };
 
   useEffect(() => {
-     setFresher(
+    setFresher(
       userDetails.details[getIndex("Experiences")].experiences[0]
         .exdesignation === ""
     );
@@ -21,14 +21,10 @@ export default function Template2({ full }) {
 
   return (
     <>
-      <style>{`.template2 .header{padding: 15px 20px}.template2{min-height: 100%}.template2 *{margin: 0;padding: 0}.template2 p, .template2 li{color:#222;margin: 0 ; font-size: 12px}.template2 .details .item{margin: 5px 0; padding: 0 3px;width: 32%; word-break: break-word}.template2  .yellow{border-bottom: 2px solid #ffcb00}.template2 .section .heading{position: relative;padding: 10px 0;}.template2 .section .heading>span{ position: absolute; top:0;left:-20px;width:50px;height:50px;border-radius:50%;background:#ffcb00;z-index: 0}.template2 .section .heading h2{width:max-content;position:relative;color: #363636;}.template2 .section .sectionD .date{width: 25%;margin-right: 15px}.template2 .section .sectionD .degree{flex-grow: 1;}.template2 .section .heading h2::before{content:""; position:absolute; width: 60%; height: 2px; border-radius: 3px; background: #ffcb00; top: 110%;right:-20%;}.template2 .footer{margin:0;position:absolute;bottom:0px;text-align:center;background:yellow;height:max-content;color:#333;border-radius: 0 0 7px 7px}`}</style>
+      <style>{`.template2 .header{padding: 15px 20px}.template2{min-height: 100%}.template2 *{margin: 0;padding: 0}.template2 p, .template2 li{color:#222;margin: 0 ; font-size: 12px}.template2 .details .item{margin: 5px 0; padding: 0 3px;width: 32%; word-break: break-word}.template2  .yellow{border-bottom: 2px solid #ffcb00}.template2 .section .heading{position: relative;padding: 10px 0;}.template2 .section .heading>span{ position: absolute; top:0;left:-20px;width:50px;height:50px;border-radius:50%;background:#ffcb00;z-index: 0}.template2 .section .heading h2{width:max-content;position:relative;color: #363636;}.template2 .section .sectionD .date{width: 25%;margin-right: 15px}.template2 .section .sectionD .degree{flex-grow: 1;}.template2 .section .heading h2::before{content:""; position:absolute; width: 60%; height: 2px; border-radius: 3px; background: #ffcb00; top: 110%;right:-20%;}.template2 .footer{margin:0;position:absolute;bottom:0px;text-align:center;background:yellow;height:max-content;color:#333;border-radius: 0 0 7px 7px}.template2 ul, .template2 ol{padding-left; 20px}`}</style>
 
       <div
-        style={
-          full
-            ? { position: "absolute", visibility: "hidden" }
-            : { }
-        }
+        style={full ? { position: "absolute", visibility: "hidden" } : {}}
         className="bg-white template2"
         id={full ? "contentFrom" : ""}
       >
@@ -58,7 +54,11 @@ export default function Template2({ full }) {
         <div className="details d-flex justify-content-between px-3 py-2 flex-wrap yellow">
           <div className="item" style={{ width: "25%" }}>
             <h4>Phone</h4>
-            <p></p>
+            <p>
+              {mobile !== ""
+                ? "+91 " + mobile.substr(0, 5) + " " + mobile.substr(5)
+                : ""}
+            </p>
           </div>
           <div className="item" style={{ flex: ".5" }}>
             <h4>Email</h4>
@@ -83,16 +83,24 @@ export default function Template2({ full }) {
               case "Objective":
                 sectionContent =
                   sectionUser.objective != "" ? (
-                    <p>{sectionUser.objective}</p>
+                    <pre
+                      style={{
+                        whiteSpace: "pre-wrap",
+                        fontFamily: "inherit",
+                        fontSize: "12px",
+                      }}
+                    >
+                      {sectionUser.objective}
+                    </pre>
                   ) : !full ? (
-                    <p>
+                    <pre style={{ fontFamily: "inherit" }}>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Architecto tempore neque error accusantium velit aut sunt
                       non, quisquam molestiae odit consectetur nihil. Voluptas
                       corrupti accusamus laborum error repudiandae minus quas!
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Architecto tempore neque error accusantium
-                    </p>
+                    </pre>
                   ) : (
                     <p>Your Professional Summary please</p>
                   );
@@ -100,7 +108,7 @@ export default function Template2({ full }) {
               case "Skills":
                 sectionContent =
                   sectionUser.skills[0] !== "" ? (
-                    <ul style={{ paddingLeft: "20px" }}>
+                    <ul className="sectionD py-2">
                       {sectionUser.skills.map((k, i) => {
                         if (k !== "") return <li key={i}>{k}</li>;
                       })}
@@ -122,7 +130,7 @@ export default function Template2({ full }) {
                 break;
               case "Educations":
                 sectionContent = (
-                  <>
+                  <div className="sectionD py-2">
                     {sectionUser.educations[0].ediname !== "" ? (
                       <>
                         {sectionUser.educations.map((k, l) => {
@@ -142,7 +150,7 @@ export default function Template2({ full }) {
                         })}
                       </>
                     ) : !full ? (
-                      <>
+                      <div className="sectionD py-2">
                         <div className="d-flex mb-3">
                           <div className="date">
                             <p>2018-2020</p>
@@ -163,18 +171,18 @@ export default function Template2({ full }) {
                             <p>Lakshmi Narain College of Technology</p>
                           </div>
                         </div>
-                      </>
+                      </div>
                     ) : (
                       <p>Add your maximum Qualification</p>
                     )}
-                  </>
+                  </div>
                 );
                 break;
               case "Experiences":
                 sectionContent = (
                   <>
                     {sectionUser.experiences[0].exdesignation !== "" ? (
-                      <>
+                      <div className="sectionD py-2">
                         {sectionUser.experiences.map((k, l) => {
                           return (
                             <div className="exp mb-3" key={l}>
@@ -200,9 +208,9 @@ export default function Template2({ full }) {
                             </div>
                           );
                         })}
-                      </>
+                      </div>
                     ) : (
-                      <>
+                      <div className="sectionD py-2">
                         <div className="exp mb-3">
                           <div className="d-flex">
                             <div className="degree">
@@ -222,7 +230,7 @@ export default function Template2({ full }) {
                             cupiditate doloremque numquam nam.
                           </p>
                         </div>
-                      </>
+                      </div>
                     )}
                   </>
                 );
@@ -230,7 +238,7 @@ export default function Template2({ full }) {
               default:
                 sectionContent = (
                   <div
-                    className="div-description"
+                    className="sectionD py-2"
                     dangerouslySetInnerHTML={{
                       __html: sectionUser.value,
                     }}
@@ -250,7 +258,8 @@ export default function Template2({ full }) {
                       <span></span>
                       <h2>{k.title}</h2>
                     </div>
-                    <div className="sectionD py-2">{sectionContent}</div>
+                    {/* <div className="sectionD py-2">{sectionContent}</div> */}
+                    {sectionContent}
                   </div>
                 );
               }
@@ -265,13 +274,20 @@ export default function Template2({ full }) {
                     <span></span>
                     <h2>{k.title}</h2>
                   </div>
-                  <div className="sectionD py-2">{sectionContent}</div>
+                  {/* <div className="sectionD py-2">{sectionContent}</div> */}
+                  {sectionContent}
                 </div>
               );
           }
         })}
-        
       </div>
+      {full && (
+        <div
+          id={full ? "transfer" : ""}
+          style={full ? { position: "absolute", visibility: "hidden" } : {}}
+          className="bg-white template2"
+        ></div>
+      )}
       {full && (
         <div id={full ? "contentTo" : ""} className="bg-white template2"></div>
       )}
