@@ -637,7 +637,7 @@ main .mainWrapper.build .content .previewContainer .viewResume {
   visibility: hidden;
   top: 49%;
   left: 50%;
-  /* rotate: -45deg; */
+  /* pointer-events: none; */
   transform: translate(-50%, -50%);
   width: 60px;
   height: 60px;

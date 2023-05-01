@@ -16,7 +16,7 @@ export default function Build() {
     let childCount = 0;
     let removed = [];
 
-    while (height < contentHeight - 200 && childCount < childrens.length) {
+    while (height < contentHeight - 70 && childCount < childrens.length) {
       height += childrens[childCount].offsetHeight;
       removed.push(childrens[childCount]);
       childCount++;
@@ -153,7 +153,7 @@ export default function Build() {
     let tempHeight = 0,
       i = 0;
     while (i < child.length) {
-      if (tempHeight + child[i].offsetHeight <= height - 50) {
+      if (tempHeight + child[i].offsetHeight <= height - 70) {
         arr.push(child[i]);
         tempHeight += child[i].offsetHeight;
         i++;
@@ -190,7 +190,6 @@ export default function Build() {
     let contentFrom = document.querySelector("#contentFrom");
     let contentTo = document.querySelector("#contentTo");
     let transfer = document.querySelector("#transfer");
-    // let childrens = toArray(contentFrom.children);
     let height = document.getElementById("chooseContent").clientHeight;
     contentTo.innerHTML = "";
     transfer.innerHTML = contentFrom.innerHTML;

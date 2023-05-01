@@ -126,7 +126,6 @@ const State = ({ children }) => {
         type: "success",
       });
   };
-
   const handleChange = (selector, id, val, i, ai) => {
     switch (selector) {
       case "basics":

@@ -21,7 +21,7 @@ export default function Template2({ full }) {
 
   return (
     <>
-      <style>{`.template2 .header{padding: 15px 20px}.template2{min-height: 100%}.template2 *{margin: 0;padding: 0}.template2 p, .template2 li{color:#222;margin: 0 ; font-size: 12px}.template2 .details .item{margin: 5px 0; padding: 0 3px;width: 32%; word-break: break-word}.template2  .yellow{border-bottom: 2px solid #ffcb00}.template2 .section .heading{position: relative;padding: 10px 0;}.template2 .section .heading>span{ position: absolute; top:0;left:-20px;width:50px;height:50px;border-radius:50%;background:#ffcb00;z-index: 0}.template2 .section .heading h2{width:max-content;position:relative;color: #363636;}.template2 .section .sectionD .date{width: 25%;margin-right: 15px}.template2 .section .sectionD .degree{flex-grow: 1;}.template2 .section .heading h2::before{content:""; position:absolute; width: 60%; height: 2px; border-radius: 3px; background: #ffcb00; top: 110%;right:-20%;}.template2 .footer{margin:0;position:absolute;bottom:0px;text-align:center;background:yellow;height:max-content;color:#333;border-radius: 0 0 7px 7px}.template2 ul, .template2 ol{padding-left; 20px}`}</style>
+      <style>{`.template2 .header{padding: 15px 20px;min-height:100px;height:15vh;}.template2{min-height: 100%}.template2 *{margin: 0;padding: 0}.template2 p, .template2 li{color:#222;margin: 0 ; font-size: 12px}.template2 .details .item{margin: 5px 0; padding: 0 3px;width: 32%; word-break: break-word}.template2  .yellow{border-bottom: 2px solid #ffcb00}.template2 .section .heading{position: relative;padding: 10px 0;}.template2 .section .heading>span{ position: absolute; top:0;left:-20px;width:50px;height:50px;border-radius:50%;background:#ffcb00;z-index: 0}.template2 .section .heading h2{width:max-content;position:relative;color: #363636;}.template2 .section .sectionD .date{width: 25%;margin-right: 15px}.template2 .section .sectionD .degree{flex-grow: 1;}.template2 .section .heading h2::before{content:""; position:absolute; width: 60%; height: 2px; border-radius: 3px; background: #ffcb00; top: 110%;right:-20%;}.template2 .footer{margin:0;position:absolute;bottom:0px;text-align:center;background:yellow;height:max-content;color:#333;border-radius: 0 0 7px 7px}.template2 ul, .template2 ol{padding-left; 20px}`}</style>
 
       <div
         style={full ? { position: "absolute", visibility: "hidden" } : {}}
@@ -36,7 +36,7 @@ export default function Template2({ full }) {
                 : userDetails.tempImgSrc
             }
             alt="Your Photo"
-            style={{ width: "60px", marginRight: "15px" }}
+            style={{ height: "100%", marginRight: "5vh", borderRadius: "3px" }}
           />
           <div className="header-side d-flex justify-content-center flex-column">
             <h2 style={{ fontSize: "28px", color: "#363636", margin: "0" }}>

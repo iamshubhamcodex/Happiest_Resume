@@ -7,13 +7,13 @@ export default function Template3({ full }) {
     userDetails.details[0];
   const [fresher, setFresher] = useState(false);
   const url = "https://happiestresume.com/public/resume_yellow/assets/imgs/";
-  const images = [
-    "about.png",
-    "achievements.png",
-    "work-experience.png",
-    "education.png",
-  ];
-
+  const images = {
+    Objective: url + "about.png",
+    Skills: url + "achievements.png",
+    Educations: url + "education.png",
+    Experiences: url + "work-experience.png",
+    Custom: "/custom.jpg",
+  };
 
   const getIndex = (val) => {
     for (let i = 0; i < sectionDetails.length; i++)
@@ -21,7 +21,6 @@ export default function Template3({ full }) {
   };
 
   useEffect(() => {
-
     setFresher(
       userDetails.details[getIndex("Experiences")].experiences[0]
         .exdesignation === ""
@@ -32,14 +31,10 @@ export default function Template3({ full }) {
     <>
       <style>{`.template3 *{font-family:sans-serif;margin:0;padding:0}.template3{min-height: 100%}.template3 .header{height:120px;background:#ffc813;width:100%;gap:25px;}.template3 .header .name h2{font-size:25px;color:black;font-weight:700;text-align:right}.template3 .header .name p{color:#111;font-weight:300;text-align:right;font-size:17px}.template3${
         full ? " .A4" : ".notfull"
-      } {background:#222;}.template3 .section .heading{border-radius:3px 3px 0 0;background:black;gap:20px;}.template3 .section .details{background:rgba(255,255,255,0.04);border-radius:0 0 3px 3px;border:1px solid #333;}.template3 .section .details p,.template3 .section .details li{color:#ccc}.template3 .section .details .date{color:#aaa}.template3 .section .details .botom{border-bottom: 1px solid #888}.template3 .section .details .botom:last-of-type{border:none}.template3 footer{position: absd olute;bottom:0;background:#ffc813;width:100%;text-align:center;}`}</style>
+      } {background:#222;}.template3 .section .heading{border-radius:3px 3px 0 0;background:black;gap:20px;}.template3 .section .details{background:rgba(255,255,255,0.04);border-radius:0 0 3px 3px;border:1px solid #333;}.template3 .section .details p,.template3 .section .details li{color:#ccc}.template3 .section .details .date{color:#aaa}.template3 .section .details .botom{border-bottom: 1px solid #888}.template3 .section .details .botom:last-of-type{border:none}.template3 footer{position: absd olute;bottom:0;background:#ffc813;width:100%;text-align:center;}.template3 ul,.template3 ol{padding-left: 16px;}`}</style>
       <div
         className="template3 notfull"
-        style={
-          full
-            ? { position: "absolute", visibility: "hidden" }
-            : { }
-        }
+        style={full ? { position: "absolute", visibility: "hidden" } : {}}
         id={full ? "contentFrom" : ""}
       >
         <div className="header d-flex align-items-center">
@@ -67,7 +62,9 @@ export default function Template3({ full }) {
               case "Objective":
                 sectionContent =
                   sectionUser.objective != "" ? (
-                    <p>{sectionUser.objective}</p>
+                    <div className="details px-3 py-2">
+                      <p>{sectionUser.objective}</p>
+                    </div>
                   ) : !full ? (
                     <p>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -82,13 +79,13 @@ export default function Template3({ full }) {
               case "Skills":
                 sectionContent =
                   sectionUser.skills[0] !== "" ? (
-                    <ul className="px-3">
+                    <div className="details px-3 py-2">
                       {sectionUser.skills.map((k, i) => {
                         if (k !== "") return <li key={i}>{k}</li>;
                       })}
-                    </ul>
+                    </div>
                   ) : (
-                    <ul className="px-3">
+                    <div className="details px-3 py-2">
                       {!full ? (
                         <>
                           <li>Laravel</li>
@@ -99,33 +96,30 @@ export default function Template3({ full }) {
                       ) : (
                         <li>Add atleast one Skill</li>
                       )}
-                    </ul>
+                    </div>
                   );
                 break;
               case "Educations":
                 sectionContent = (
-                  <>
+                  <div className="details px-3 py-2">
                     {sectionUser.educations[0].ediname !== "" ? (
                       <>
                         {sectionUser.educations.map((k, l) => {
                           return (
-                            <>
-                              <div
-                                key={l}
-                                className="top mb-1 d-flex align-items-center justify-content-between"
-                              >
+                            <div key={l}>
+                              <div className="top mb-1 d-flex align-items-center justify-content-between">
                                 <h4 className="text-white">{k.edcname}</h4>
                                 <p className="date">Completed in {k.edcdate}</p>
                               </div>
                               <div className="botom pb-2 mb-2 px-2">
                                 <p>From{k.ediname}</p>
                               </div>
-                            </>
+                            </div>
                           );
                         })}
                       </>
                     ) : !full ? (
-                      <>
+                      <div className="details px-3 py-2">
                         <div className="top mb-1 d-flex align-items-center justify-content-between">
                           <h4 className="text-white">12th</h4>
                           <p className="date">Completed in 2021</p>
@@ -148,17 +142,16 @@ export default function Template3({ full }) {
                             Minus, dignissimos.
                           </p>
                         </div>
-                      </>
+                      </div>
                     ) : (
                       <p>Add your maximum Qualification</p>
                     )}
-                  </>
+                  </div>
                 );
                 break;
               case "Experiences":
                 sectionContent = (
-                  <>
-                    {" "}
+                  <div className="details px-3 py-2">
                     {sectionUser.experiences[0].exdesignation !== "" ? (
                       <>
                         {sectionUser.experiences.map((k, l) => {
@@ -200,8 +193,7 @@ export default function Template3({ full }) {
                         })}
                       </>
                     ) : (
-                      <>
-                        {" "}
+                      <div className="details px-3 py-2">
                         <div className="top mb-1 d-flex align-items-center justify-content-between">
                           <h4 className="text-white">React Developer</h4>
                           <p className="date">
@@ -230,15 +222,15 @@ export default function Template3({ full }) {
                             </p>
                           </div>
                         </div>
-                      </>
+                      </div>
                     )}
-                  </>
+                  </div>
                 );
                 break;
               default:
                 sectionContent = (
                   <div
-                    className="div-description"
+                    className="details px-3 py-2"
                     dangerouslySetInnerHTML={{
                       __html: sectionUser.value,
                     }}
@@ -248,31 +240,32 @@ export default function Template3({ full }) {
             if (k.title === "Experiences") {
               if (!(full && fresher)) {
                 return (
-                  <div className="section py-3 px-4">
+                  <div className="section py-3 px-4" key={i}>
                     <div className="heading d-flex">
                       <img
                         style={{ width: 30, borderRadius: "3px 0 0 0" }}
-                        src={url + images[i - 1]}
-                        alt="Section Heading"
+                        src={images[k.title] ?? "/custom.jpg"}
                       />
                       <h2 className="py-1 text-white">{k.title}</h2>
                     </div>
-                    <div className="details px-3 py-2">{sectionContent}</div>
+                    {/* <div className="details px-3 py-2">{sectionContent}</div> */}
+                    {sectionContent}
                   </div>
                 );
               }
             } else
               return (
-                <div className="section py-3 px-4">
+                <div className="section py-3 px-4" key={i}>
                   <div className="heading d-flex">
+                    {}
                     <img
                       style={{ width: 30, borderRadius: "3px 0 0 0" }}
-                      src={url + images[i - 1]}
-                      alt="Section Heading"
+                      src={images[k.title] ?? "/custom.jpg"}
                     />
                     <h2 className="py-1 text-white">{k.title}</h2>
                   </div>
-                  <div className="details px-3 py-2">{sectionContent}</div>
+                  {/* <div className="details px-3 py-2">{sectionContent}</div> */}
+                  {sectionContent}
                 </div>
               );
           }
@@ -324,9 +317,15 @@ export default function Template3({ full }) {
             </div>
           </div>
         </div>
-       
       </div>
       {full && <div id={full ? "contentTo" : ""} className="template3"></div>}
+      {full && (
+        <div
+          id={full ? "transfer" : ""}
+          style={full ? { position: "absolute", visibility: "hidden" } : {}}
+          className="template3"
+        ></div>
+      )}
     </>
   );
 }

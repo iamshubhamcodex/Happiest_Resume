@@ -88,7 +88,12 @@ export default function Sidebar() {
                         {sectionDetails.map((k, i) => (
                           <p
                             onClick={() => {
-                              setCurrentSection(i)
+                              setCurrentSection(i);
+                              document
+                                .getElementById(
+                                  "preview_" + k.title.toLowerCase()
+                                )
+                                ?.scrollIntoView({ block: "center" });
                             }}
                             style={{
                               display: "block",

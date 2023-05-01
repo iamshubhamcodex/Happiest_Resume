@@ -7,8 +7,16 @@ export default function Template1({ full }) {
     userDetails.details[0];
   const [fresher, setFresher] = useState(false);
 
+  const getIndex = (val) => {
+    for (let i = 0; i < sectionDetails.length; i++)
+      if (sectionDetails[i].title === val) return i;
+  };
+
   useEffect(() => {
-    setFresher(userDetails.details[3].experiences[0].exdesignation === "");
+    setFresher(
+      userDetails.details[getIndex("Experiences")].experiences[0]
+        .exdesignation === ""
+    );
 
     // eslint-disable-next-line
   }, [userDetails]);
@@ -20,7 +28,7 @@ export default function Template1({ full }) {
           style={full ? { position: "absolute", visibility: "hidden" } : {}}
           id={full ? "contentFrom" : ""}
         >
-          <style>{`.containerp  header{background: rgb(30, 32, 30);color: white;display: flex;align-items:center;}.containerp ul {margin: 0 !important; padding: 0 !important} .container-fluid{padding: 0 !important}`}</style>
+          <style>{`.containerp *{margin:0; padding:0;}.containerp header{background: rgb(30, 32, 30);color: white;display: flex;align-items:center;}.containerp ul:not(.section-content) {margin: 0 !important; padding-left: 20px} .container-fluid{padding: 0 !important}`}</style>
           <style>{`section{margin: 15px 10px}h1{font-size: 22px}h2{font-size: 17px}h3 {font-size: 15px}h4{font-size: 13px}.section-content{padding:0 1.25rem;font-size: 10px} .custom h1{font-size: 15px}.custom h2{font-size: 14px}.custom h3{font-size: 13px}.container-fluid{padding: 0 7px}.containerp .A4{background: white;}`}</style>
           <header>
             <div
@@ -76,9 +84,11 @@ export default function Template1({ full }) {
                   sectionContent =
                     sectionUser.objective != "" ? (
                       <pre
+                        className="px-2"
                         style={{
                           whiteSpace: "pre-wrap",
                           fontFamily: "inherit",
+                          fontSize: 12,
                         }}
                       >
                         {sectionUser.objective}
@@ -92,13 +102,13 @@ export default function Template1({ full }) {
                 case "Skills":
                   sectionContent =
                     sectionUser.skills[0] !== "" ? (
-                      <ul>
+                      <ul className="section-content">
                         {sectionUser.skills.map((k, i) => {
                           if (k !== "") return <li key={i}>{k}</li>;
                         })}
                       </ul>
                     ) : (
-                      <ul>
+                      <ul className="section-content">
                         {!full ? (
                           <>
                             <li>
@@ -131,11 +141,11 @@ export default function Template1({ full }) {
                   sectionContent = (
                     <>
                       {sectionUser.educations[0].ediname !== "" ? (
-                        <>
+                        <div className="section-content">
                           {sectionUser.educations.map((k, l) => {
                             if (k.edcname !== "")
                               return (
-                                <div className="experience-item" key={l}>
+                                <div className="experience-item mb-3" key={l}>
                                   <h4>{k.edcname}</h4>
                                   <p>
                                     {k.edcdate && (
@@ -153,22 +163,22 @@ export default function Template1({ full }) {
                                 </div>
                               );
                           })}
-                        </>
+                        </div>
                       ) : !full ? (
-                        <>
-                          <div className="experience-item">
+                        <div className="section-content">
+                          <div className="experience-item mb-3">
                             <h4>12th</h4>
                             <p>
                               Completed at <b>2019</b> from <b>School</b>
                             </p>
                           </div>
-                          <div className="experience-item">
+                          <div className="experience-item mb-3">
                             <h4>B. Tech. CSE</h4>
                             <p>
                               Completed at <b>2023</b> from <b>College</b>
                             </p>
                           </div>
-                        </>
+                        </div>
                       ) : (
                         <p>Add your maximum Qualification</p>
                       )}
@@ -179,10 +189,10 @@ export default function Template1({ full }) {
                   sectionContent = (
                     <>
                       {sectionUser.experiences[0].exdesignation !== "" ? (
-                        <>
+                        <div className="section-content">
                           {sectionUser.experiences.map((k, l) => {
                             return (
-                              <div className="experience-item" key={l}>
+                              <div className="experience-item mb-3" key={l}>
                                 <h4>
                                   {k.exdesignation}, {k.excname}
                                 </h4>
@@ -195,10 +205,10 @@ export default function Template1({ full }) {
                               </div>
                             );
                           })}
-                        </>
+                        </div>
                       ) : (
-                        <>
-                          <div className="experience-item">
+                        <div className="section-content">
+                          <div className="experience-item mb-3">
                             <h4>
                               Customer Service Representative, ABC Company
                             </h4>
@@ -212,7 +222,7 @@ export default function Template1({ full }) {
                               improve overall customer experience.
                             </p>
                           </div>
-                          <div className="experience-item">
+                          <div className="experience-item mb-3">
                             <h4>Sales Associate, XYZ Company</h4>
                             <p>
                               <span>January 2016 - May 2018</span> Generated
@@ -225,7 +235,7 @@ export default function Template1({ full }) {
                               sales targets.
                             </p>
                           </div>
-                        </>
+                        </div>
                       )}
                     </>
                   );
@@ -233,7 +243,7 @@ export default function Template1({ full }) {
                 default:
                   sectionContent = (
                     <div
-                      className="div-description"
+                      className="section-content"
                       dangerouslySetInnerHTML={{
                         __html: sectionUser.value,
                       }}
@@ -241,38 +251,30 @@ export default function Template1({ full }) {
                   );
                   break;
               }
-              if (k.title === "Experiences") {
-                if (!(full && fresher)) {
-                  return (
-                    <section
-                      className="px-1 "
-                      key={i}
-                      id={"preview_" + k.title.toLowerCase()}
-                    >
-                      <div className="section-header">
-                        <h2>{k.title}</h2>
-                      </div>
-                      <div className="section-content">{sectionContent}</div>
-                    </section>
-                  );
-                }
-              } else
+              const Idk = () => {
                 return (
                   <section
-                    className="px-1 "
-                    key={i}
+                    className="px-3 my-3"
+                    data-stop={!full}
                     id={"preview_" + k.title.toLowerCase()}
                   >
-                    <div className="section-header">
+                    <div className="section-header mb-2">
                       <h2>{k.title}</h2>
                     </div>
-                    <div className="section-content">{sectionContent}</div>
+                    {/* <div className="section-content">{sectionContent}</div> */}
+                    {sectionContent}
                   </section>
                 );
+              };
+              if (k.title === "Experiences") {
+                if (!(full && fresher)) {
+                  return <Idk key={i} />;
+                }
+              } else return <Idk key={i} />;
             }
           })}
-          <section className="px-1 ">
-            <div className="section-header">
+          <section className="px-3 my-3">
+            <div className="section-header mb-2">
               <h2>Personal Information</h2>
             </div>
             <div className="section-content">
@@ -296,6 +298,12 @@ export default function Template1({ full }) {
           </section>
         </main>
         <main id={full ? "contentTo" : ""}></main>
+        {full && (
+          <main
+            id={full ? "transfer" : ""}
+            style={full ? { position: "absolute", visibility: "hidden" } : {}}
+          ></main>
+        )}
       </div>
     </div>
   );
