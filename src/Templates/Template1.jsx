@@ -1,10 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useDeferredValue, useEffect, useState } from "react";
 import { Context } from "../Context/State";
 
 export default function Template1({ full }) {
-  let { userDetails, sectionDetails, resumeRef } = useContext(Context);
+  let { userDetails, sectionDetails } = useContext(Context);
   let { name, email, mobile, address, title, city, state, country } =
     userDetails.details[0];
+
+  let defferedUserDetails = useDeferredValue(userDetails);
   const [fresher, setFresher] = useState(false);
 
   const getIndex = (val) => {
@@ -14,15 +16,16 @@ export default function Template1({ full }) {
 
   useEffect(() => {
     setFresher(
-      userDetails.details[getIndex("Experiences")].experiences[0]
+      defferedUserDetails.details[getIndex("Experiences")].experiences[0]
         .exdesignation === ""
     );
 
     // eslint-disable-next-line
-  }, [userDetails]);
+  }, [defferedUserDetails]);
+
 
   return (
-    <div ref={resumeRef} className={"containerp h-100"}>
+    <div className={"containerp h-100"}>
       <div className="container-fluid bg-white">
         <main
           style={full ? { position: "absolute", visibility: "hidden" } : {}}
@@ -41,9 +44,9 @@ export default function Template1({ full }) {
             >
               <img
                 src={
-                  userDetails.imgSrc !== ""
-                    ? userDetails.imgSrc
-                    : userDetails.tempImgSrc
+                  defferedUserDetails.imgSrc !== ""
+                    ? defferedUserDetails.imgSrc
+                    : defferedUserDetails.tempImgSrc
                 }
                 alt="Your Photo"
                 style={{
@@ -77,7 +80,7 @@ export default function Template1({ full }) {
           </header>
           {sectionDetails.map((k, i) => {
             if (i !== 0) {
-              let sectionUser = userDetails.details[i];
+              let sectionUser = defferedUserDetails.details[i];
               let sectionContent;
               switch (k.title) {
                 case "Objective":
@@ -88,13 +91,27 @@ export default function Template1({ full }) {
                         style={{
                           whiteSpace: "pre-wrap",
                           fontFamily: "inherit",
-                          fontSize: 12,
+                          fontSize: 10,
                         }}
                       >
                         {sectionUser.objective}
                       </pre>
                     ) : !full ? (
-                      "A highly motivated and detail-oriented individual with excellent organizational skills and a strong work ethic. Experienced in customer service and communication with a proven track record of delivering results. Seeking a position in a dynamic and challenging environment where my skills can be utilized to their fullest potential."
+                      <pre
+                        className="px-2"
+                        style={{
+                          whiteSpace: "pre-wrap",
+                          fontFamily: "inherit",
+                          fontSize: 10,
+                        }}
+                      >
+                        A highly motivated and detail-oriented individual with
+                        excellent organizational skills and a strong work ethic.
+                        Experienced in customer service and communication with a
+                        proven track record of delivering results. Seeking a
+                        position in a dynamic and challenging environment where
+                        my skills can be utilized to their fullest potential.
+                      </pre>
                     ) : (
                       "Your Professional Summary please"
                     );

@@ -3,9 +3,12 @@ import { Context } from "../Context/State";
 import AllTemplate from "./AllTemplates";
 import PreviewModal from "./PreviewModal";
 
-export default function Preview({ setPreviewModalShow, previewModalShow, previewLoading }) {
-  let { userDetails, setPreveiwResume, mobileView } = useContext(Context);
-
+export default function Preview({
+  setPreviewModalShow,
+  previewModalShow,
+  previewLoading,
+}) {
+  let { userDetails, mobileView } = useContext(Context);
   return (
     <>
       <div
@@ -31,10 +34,7 @@ export default function Preview({ setPreviewModalShow, previewModalShow, preview
             <i className="fa-solid fa-chevron-right" />
           </span>
         </div>
-        <div
-          className="preview"
-         
-        >
+        <div className="preview">
           <AllTemplate val={userDetails.templateId} />
         </div>
         <div className="actionBtns">

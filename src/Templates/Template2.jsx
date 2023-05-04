@@ -21,7 +21,7 @@ export default function Template2({ full }) {
 
   return (
     <>
-      <style>{`.template2 .header{padding: 15px 20px;min-height:100px;height:15vh;}.template2{min-height: 100%}.template2 *{margin: 0;padding: 0}.template2 p, .template2 li{color:#222;margin: 0 ; font-size: 12px}.template2 .details .item{margin: 5px 0; padding: 0 3px;width: 32%; word-break: break-word}.template2  .yellow{border-bottom: 2px solid #ffcb00}.template2 .section .heading{position: relative;padding: 10px 0;}.template2 .section .heading>span{ position: absolute; top:0;left:-20px;width:50px;height:50px;border-radius:50%;background:#ffcb00;z-index: 0}.template2 .section .heading h2{width:max-content;position:relative;color: #363636;}.template2 .section .sectionD .date{width: 25%;margin-right: 15px}.template2 .section .sectionD .degree{flex-grow: 1;}.template2 .section .heading h2::before{content:""; position:absolute; width: 60%; height: 2px; border-radius: 3px; background: #ffcb00; top: 110%;right:-20%;}.template2 .footer{margin:0;position:absolute;bottom:0px;text-align:center;background:yellow;height:max-content;color:#333;border-radius: 0 0 7px 7px}.template2 ul, .template2 ol{padding-left; 20px}`}</style>
+      <style>{`.template2 .header{padding: 15px 20px;min-height:100px;height:15vh;}.template2{min-height: 100%}.template2 *{margin: 0;padding: 0}.template2 p, .template2 li{color:#222;margin: 0 ; font-size: 12px}.template2 .details .item{margin: 5px 0; padding: 0 3px;width: 32%; word-break: break-word}.template2  .yellow{border-bottom: 2px solid #ffcb00}.template2 .section .heading{position: relative;padding: 10px 0;}.template2 .section .heading>span{ position: absolute; top:0;left:-20px;width:50px;height:50px;border-radius:50%;background:#ffcb00;z-index: 0}.template2 .section .heading h2{width:max-content;position:relative;color: #363636;}.template2 .section .sectionD .date{width: 30%;margin-right: 7px}.template2 .section .sectionD .degree{flex-grow: 1;}.template2 .section .heading h2::before{content:""; position:absolute; width: 60%; height: 2px; border-radius: 3px; background: #ffcb00; top: 110%;right:-20%;}.template2 .footer{margin:0;position:absolute;bottom:0px;text-align:center;background:yellow;height:max-content;color:#333;border-radius: 0 0 7px 7px}.template2 ul, .template2 ol{padding-left; 20px}.template2 .exp{margin-bottom: 10px;}`}</style>
 
       <div
         style={full ? { position: "absolute", visibility: "hidden" } : {}}
@@ -178,14 +178,14 @@ export default function Template2({ full }) {
                   </div>
                 );
                 break;
-              case "Experiences":
+            case "Experiences":
                 sectionContent = (
                   <>
                     {sectionUser.experiences[0].exdesignation !== "" ? (
                       <div className="sectionD py-2">
                         {sectionUser.experiences.map((k, l) => {
                           return (
-                            <div className="exp mb-3" key={l}>
+                            <div className="exp" key={l}>
                               <div className="d-flex">
                                 <div className="degree">
                                   <h5 style={{ margin: "0" }}>
@@ -201,7 +201,7 @@ export default function Template2({ full }) {
                               </div>
                               <p
                                 className="text-muted"
-                                style={{ marginTop: 7, fontSize: "12px" }}
+                                style={{ marginTop: 5, fontSize: "12px" }}
                               >
                                 {k.exdescription}
                               </p>
@@ -211,7 +211,7 @@ export default function Template2({ full }) {
                       </div>
                     ) : (
                       <div className="sectionD py-2">
-                        <div className="exp mb-3">
+                        <div className="exp">
                           <div className="d-flex">
                             <div className="degree">
                               <h5 style={{ margin: "0" }}>React Developer</h5>
@@ -250,7 +250,7 @@ export default function Template2({ full }) {
               if (!(full && fresher)) {
                 return (
                   <div
-                    className="px-5 py-3 section"
+                    className="px-5 py-1 section"
                     key={i}
                     id={"preview_" + k.title.toLowerCase()}
                   >
@@ -266,7 +266,7 @@ export default function Template2({ full }) {
             } else
               return (
                 <div
-                  className="px-5 py-2 section"
+                  className="px-5 py-1 section"
                   key={i}
                   id={"preview_" + k.title.toLowerCase()}
                 >

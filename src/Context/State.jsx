@@ -119,6 +119,8 @@ const State = ({ children }) => {
     setSectionDetails(sectionStructure);
     window.localStorage.removeItem("userDetails");
     window.localStorage.removeItem("sectionDetails");
+    setUserDetails(userStructure);
+    setSectionDetails(sectionStructure);
     if (condition)
       showAlert({
         show: true,
